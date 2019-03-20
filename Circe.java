@@ -12,19 +12,12 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -36,19 +29,13 @@ import javafx.stage.StageStyle;
 
 public class Circe extends Application {
     Stage stage;
-    GraphicsContext gc; // Graphics Context for drawing on primary Stage
     TabPane root;
-    String oldHint; // Storage: former "press ESC key" message
-    KeyCombination oldKey; // Storage: former exit-from-FullScreen key(s)
+    Button btNew;
 
     /*
      * JavaFX Application thread automatically calls start() method. The parameter
-     * Stage stage is our top-level window, then Scene scene, BorderPane root, and
-     * finally other Nodes. This is quite short: it just creates the GUI.
-     * 
-     * start() may throw an IOException when trying to load the Image from the file.
-     * There's no point in continuing if we can't load the Image, so the exception
-     * can go through to the 'keeper.
+     * Stage stage is our top-level window, then Scene scene, TabPane root, and all
+     * the other Nodes. This method is quite short: it just creates the GUI.
      * 
      * @see javafx.application.Application#start(javafx.stage.Stage)
      */
@@ -60,41 +47,36 @@ public class Circe extends Application {
 	// Set the title of the primary Stage
 	stage.setTitle("Circe");
 	// Create the TabPane, 3 Tabs and their contents
-	tabPane();
+	createTabPane();
 	// Create a Scene based on the TabPane with no background fill
 	Scene scene = new Scene(root, null);
 	// Add the Scene to the primary Stage and resize
 	stage.setScene(scene);
 	stage.show();
+	btNew.requestFocus();
     }
 
     /*
      * tabPane() method: creates TabPane, 3 Tabs and their contents.
      */
-    private boolean tabPane() {
-	// Create the input Tab
-	Tab tabInput = new Tab("Input");
-	tabInput.setClosable(false);
-	
-	// Create a VBox to hold the TextFields and Buttons
-	VBox vb = new VBox(5.0d);
+    private boolean createTabPane() {
+	// Create a TabPane to hold the 3 Tabs
+	root = new TabPane();
 
-	// Create a BorderPane to hold the VBox
-	BorderPane bp = new BorderPane(vb);
-	tabInput.setContent(bp);
-	vb.setAlignment(Pos.CENTER);
+	// Load the JavaFX CSS StyleSheet
+	root.getStylesheets().add("file:src/Circe.css");
 
-	// Create 2 x Text Fields
+	// Create the 2 x Text Fields (one-liners)
 	TextField tfData = new TextField("10010011");
 	tfData.setEditable(false);
 	TextField tfPoly = new TextField("10111");
 	tfPoly.setEditable(false);
 
-	// Create 2 x Buttons and add everything to the VBox
-	Button btNew = new Button("New CRC parameters");
+	// Create the 2 x Buttons
+	btNew = new Button("New CRC question");
 	btNew.setOnMousePressed(me -> new Thread(new Tone(262, 100)).start());
 	btNew.setOnAction(ae -> {
-	    System.out.println("Process New CRC parameters");
+	    System.out.println("Process New CRC question");
 	});
 
 	Button btExit = new Button("Exit");
@@ -103,32 +85,45 @@ public class Circe extends Application {
 	    System.out.println("Process Exit");
 	    System.exit(0);
 	});
+
+	// Create a VBox to hold the TextFields and Buttons
+	VBox vb = new VBox(10.0d);
 	vb.getChildren().addAll(tfData, tfPoly, btNew, btExit);
-	
-	// Create binary Tab and a TextArea
+	vb.setAlignment(Pos.CENTER);
+
+	// Create an Image from our file
+	ImageView iv = new ImageView(
+		"https://upload.wikimedia.org/wikipedia/commons/1/1d/J._W._Waterhouse_-_Circe_Invidiosa_-_Google_Art_Project.jpg");
+	iv.setPreserveRatio(true);
+	iv.setFitWidth(125);
+
+	// Create a BorderPane to hold the VBox
+	BorderPane bp = new BorderPane();
+	bp.setLeft(iv);
+	BorderPane.setAlignment(iv, Pos.CENTER);
+	bp.setRight(vb);
+
+	// Create the input Tab
+	Tab tabInput = new Tab("Input");
+	tabInput.setClosable(false);
+	tabInput.setContent(bp);
+
+	// Create the binary Tab and a TextArea (multiple lines)
 	TextArea taBinary = new TextArea();
 	taBinary.setEditable(false);
 	Tab tabBinary = new Tab("Binary", taBinary);
 	tabBinary.setClosable(false);
 
-	// Create polynomial Tab and a TextArea
+	// Create the polynomial Tab and a TextArea (multiple lines)
 	TextArea taPoly = new TextArea();
 	taPoly.setEditable(false);
 	Tab tabPoly = new Tab("Polynomial", taPoly);
 	tabPoly.setClosable(false);
 
-	// Create TabPane and add the 3 Tabs
-	root = new TabPane(tabInput, tabBinary, tabPoly);
-	// Load the JavaFX CSS StyleSheet
-	root.getStylesheets().add("file:src/Circe.css");
+	// Add all 3 Tabs to the TabPane
+	root.getTabs().addAll(tabInput, tabBinary, tabPoly);
 
-	// Create an Image from our file
-	Image image = new Image("file:bin/images/Circe.png");
-	// Set the image as the TabPane's background
-	root.setBackground(
-		new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-			BackgroundPosition.CENTER, new BackgroundSize(0.0d, 0.0d, false, false, false, true))));
-	// Signal that we need to layout the TabPane (ie. Nodes are done)
+	// Signal that we need to layout the TabPane (ie. the Nodes are done)
 	root.needsLayoutProperty();
 	return true;
     }
