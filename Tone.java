@@ -1,6 +1,6 @@
 
 /*
- * Class Tone: Simple sound generator for Circe Project.  It is simple ... Java does all the work.
+ * Class Tone: Simple sound generator for Silicon Project.  It is simple ... Java does all the work.
  * The methods are threaded so you can go: "new Thread(new Tone(int hz, int msecs)).start()" to play a tone.
  * If you wish, you can also set the volume: "new Thread(new Tone(int hz, int msecs, double vol)).start()", 
  * where "vol" is between 0.0d and 1.0d.
@@ -48,16 +48,15 @@ public class Tone implements Runnable {
     }
 
     /*
-     * Accessor method for value of MULTIPLIER Other classes can use it to convert
-     * from milliseconds to sampling 'ticks'
+     * Accessor method for value of MULTIPLIER
+     * Other classes can use it to convert from milliseconds to sampling 'ticks
      */
     public int getMultiplier() {
 	return this.MULTIPLIER;
     }
-
+    
     /*
      * This is the code for a new thread that plays each tone
-     * 
      * @see java.lang.Runnable#run()
      */
     public void run() {
@@ -87,13 +86,15 @@ public class Tone implements Runnable {
 	/*
 	 * When you consider that the original author doubtless cribbed the math from a
 	 * textbook, the fact that he or she screwed up everything else, is really not
-	 * very impressive. Simple, yet inelegant, ADSHR envelope generator included
+	 * very impressive. However, one obvious enhancement over the current version
+	 * would be to include an ADSHR amplitude envelope generator that varies vol in
+	 * the loop, based on i. Any takers?
 	 */
 	double scalar = SAMPLE_RATE / ((hz << 1) * Math.PI);
 	int sample = msecs * MULTIPLIER;
-	int sample2 = sample >> 1;
-	int sample4 = sample2 >> 1;
-	int sample8 = sample4 >> 1;
+	int sample2=sample >> 1;
+	int sample4=sample2 >> 1;
+	int sample8=sample4 >> 1;
 	byte[] buf = new byte[sample];
 	double env;
 	for (int i = 0; i < sample; i++) {
