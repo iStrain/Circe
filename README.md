@@ -6,4 +6,11 @@ JavaFX program to help students practice CRC calculations
 
 They should compile OK in Eclipse with Circe.java, Tone.java and Circe.css in the usual /src directory.
 
-Current status: if you compile and run it, you can see we have the main window and 3 tabbed panes: 2 labels, 2 text fields, 2 buttons and a logo on the input pane; and a text area on each of the other 2 panes.  We're pretty much ready to include the maths as the functionality underlying the "New CRC question" button, and update the styles to mimic the applet.
+Current status: if you compile and run it, you can see we have the main window and 3 tabbed panes: 2 labels, 2 text fields, 2 buttons and a logo on the input pane; and a text area on each of the other 2 panes.
+
+We now have the maths part, so it's "full steam ahead" on the program.  Take a look at the new files Ian gave us, and see if you can work out how best to integrate them into the existing framework.  We'll compare notes in "a coupla days", and agree on a way forward!
+
+Cheers,
+
+
+DUNCAN
