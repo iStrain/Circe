@@ -27,6 +27,56 @@ TabPane {
 	-fx-alignment: top-left;
 }
 
+.table-view {
+	-fx-max-width: 65em;
+	-fx-resize-policy: CONSTRAINED_RESIZE_POLICY;
+	-fx-editable: false;
+}
+
+.column-header,
+.table-view .column-header,
+.table-view .column-header .label,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler,
+.table-view .column-header-background .background {   
+    -fx-font-family: "Consolas";
+    -fx-font-size: 1em;
+	-fx-font-style: normal;
+	-fx-font-weight: normal;
+    -fx-text-fill: #311c09;
+    -fx-background-color: white;
+    -fx-stroke: transparent;
+    -fx-size: 2.5em;
+    -fx-alignment: CENTER;    
+    -fx-text-alignment: center;
+}
+
+.table-row-cell:filled:hover {
+    -fx-size: 2.5em;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+}
+
+.table-view:row-selection {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-fixed-cell-size: 2.5em;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+}
+
+.cell,
+.table-cell,
+.table-caption,
+.table-column,
+.table-row-cell:empty,
+.table-row-cell:filled,
+.table-view .table-column {
+	-fx-width: 2.5em;
+	-fx-alignment: CENTER; 
+    -fx-text-alignment: CENTER;
+}
+
 .text-field:readonly {
 	-fx-max-width: 250px;
 	-fx-pref-column-count: 25;

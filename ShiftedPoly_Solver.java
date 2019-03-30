@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package CRC;
+//package CRC;
 
 import javax.swing.JTable;
 
