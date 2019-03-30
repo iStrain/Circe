@@ -1,8 +1,12 @@
 # Circe
-JavaFX program to help students practice CRC calculations
-+ Circe.java (main JavaFX file - includes main() and start() methods, sets up the GUI, ready for the maths code);
-+ Model.java (wraps JavaFX TableView in Constructor, Accessor, Mutator and utility methods to mimic Swing's Table class);
-+ Tone.java (simple ADSHR tone generator - just makes keys beep, bit of a "work-in-progress"); and
+JavaFX program to help students practice CRC calculations.
+
+The original files Ian provided are in CRC Trainer Development.zip - you should definitely download those!
+
+Our working set includes:
++ Circe.java (main JavaFX file - includes main() and start() methods, instantiates the JavaFX GUI, ready for the maths code);
++ Model.java (wraps JavaFX TableView in Constructor, Accessor, Mutator and utility methods to mimic Swing's Table class - this is where we'll get performance improvements from people with more experience in JavaFX);
++ Tone.java (simple ADSHR tone generator - just makes keys beep, it's a bit of a "work-in-progress" but it beeps); and
 + Circe.css (JavaFX CSS file - includes most of the Styles for GUI components, we'll edit this to mimic the Applet).
 
 They should compile OK in Eclipse with the .java files and Circe.css in the usual /src directory.
