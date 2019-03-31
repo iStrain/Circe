@@ -21,6 +21,7 @@ public class Base2Solver {
 	int row_pos;
 	int number_bits;
 	int data_padding = prob.getPattern_len() - 1;
+	@SuppressWarnings("unused")
 	int current_answer_len;
 	int padding_bits_left;
 	int new_result_len;
@@ -157,6 +158,6 @@ public class Base2Solver {
 
 	    }
 	} while (!finished);
-	model.tv.refresh();
+	model.updateTableView();
     }
 }

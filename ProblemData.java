@@ -46,6 +46,7 @@ public class ProblemData {
 	/** a counter variable **/
 	int rand;
 	int bit_len; // used to hold the length of the binary number.
+	@SuppressWarnings("unused")
 	boolean bit_size_OK = false; // used to record that the binary number is big enough.
 
 	// clear both numbers

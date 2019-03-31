@@ -2,9 +2,7 @@
 /*
  * CIRCE - A JavaFX TEACHING TOOL BY:
  * -	Ian Baker (instructor)
- * -	Duncan Baxter s3737140
- * -	Kira Macarthur 
- * -	Rohan
+ * -	Duncan Baxter (s3737140)
  */
 
 import javafx.application.Application;
@@ -37,9 +35,10 @@ public class Circe extends Application {
     Button btNew;
 
     public ProblemData problemData = new ProblemData();
-    public Model model = new Model(40, 25);
+    public Model B2Model = new Model(40, 25);
     public Base2Solver B2Solver = new Base2Solver();
-    public ShiftedPoly_Solver SP_Solver = new ShiftedPoly_Solver();
+    public Model SPModel = new Model(40, 1);
+    public ShiftedPolySolver SPSolver = new ShiftedPolySolver();
 
     /*
      * JavaFX Application thread automatically calls start() method. The parameter
@@ -66,8 +65,7 @@ public class Circe extends Application {
     }
 
     /*
-     * createTabPane() method: creates TabPane, 3 Tabs and their contents. Has
-     * similar functionality to initcomponents() method in original.
+     * createTabPane() method: creates TabPane, 3 Tabs and their contents.
      */
     private boolean createTabPane() {
 	// Create a TabPane to hold the 3 Tabs
@@ -117,6 +115,8 @@ public class Circe extends Application {
 
 	// Set Grid-lines-visible during debug
 	// gp.setGridLinesVisible(true);
+
+	// Set column parameters, and add a TextArea + ImageView in Column 0
 	ColumnConstraints c0 = new ColumnConstraints();
 	c0.setPercentWidth(20);
 	c0.setHalignment(HPos.LEFT);
@@ -127,7 +127,7 @@ public class Circe extends Application {
 	gp.add(taInstructions, 0, 0, 3, 1);
 	gp.add(iv, 0, 1, 1, 4);
 
-	// Set up parameters, and add 2 x Labels + Logo in Column 1
+	// Set column parameters, and add 2 x Labels + Logo in Column 1
 	ColumnConstraints c1 = new ColumnConstraints();
 	c1.setPercentWidth(35);
 	c1.setHalignment(HPos.LEFT);
@@ -136,7 +136,7 @@ public class Circe extends Application {
 	GridPane.setConstraints(tx, 1, 3, 1, 3, HPos.LEFT, VPos.BOTTOM);
 	gp.addColumn(1, lbData, lbPattern, tx);
 
-	// Set up parameters, and add 2 x Text Fields, and 2 x Buttons in Column 2
+	// Set column parameters, and add 2 x Text Fields, and 2 x Buttons in Column 2
 	ColumnConstraints c2 = new ColumnConstraints();
 	c2.setPercentWidth(45);
 	c2.setHalignment(HPos.RIGHT);
@@ -147,20 +147,20 @@ public class Circe extends Application {
 	gp.getColumnConstraints().addAll(c0, c1, c2);
 	gp.addColumn(2, tfData, tfPattern, btNew, btExit);
 
-	// Create the input Tab
-	Tab tabInput = new Tab("Input");
+	// Create the Instructions Tab
+	Tab tabInput = new Tab("Instructions");
 	tabInput.setClosable(false);
 	tabInput.setContent(gp);
 
-	// Populate the data model and Base2 Solution Tab
+	// Populate the data and pattern TextFields, and both data models
 	updateProblemDisplay();
-	Tab tabBinary = new Tab("Base2 Solution", model.tv);
+
+	// Create the Base2 Solution Tab and add the B2 TableView
+	Tab tabBinary = new Tab("Base2 Solution", B2Model.getTableView());
 	tabBinary.setClosable(false);
 
-	// Create the Shifted Poly Solution Tab and a TextArea (multiple lines)
-	TextArea taPoly = new TextArea();
-	taPoly.setEditable(false);
-	Tab tabPoly = new Tab("Shifted Poly Solution", taPoly);
+	// Create the Shifted Poly Solution Tab and add the SP TableView
+	Tab tabPoly = new Tab("Shifted Poly Solution", SPModel.getTableView());
 	tabPoly.setClosable(false);
 
 	// Add all 3 Tabs to the TabPane
@@ -172,10 +172,11 @@ public class Circe extends Application {
     }
 
     /*
-     * updateProblemDisplay() uses ProblemData.generateNewProblem() to create a new
-     * pair of binary numbers. Converts each binary number to a string and displays
-     * it on the Input tab. Uses Base2Solver.solveBase2() to complete the Base2
-     * Solution table. Uses
+     * updateProblemDisplay() method uses ProblemData.generateNewProblem() to create
+     * a new pair of binary numbers. Converts each binary number to a string and
+     * displays it on the Instructions tab. Uses B2Solver.solveBase2() to complete
+     * the Base2 Solution TableView. Uses SPSolver.solveShiftedPoly() to complete
+     * the Shifted Poly Solution TableView.
      */
     private void updateProblemDisplay() {
 	int field_pos;
@@ -185,7 +186,7 @@ public class Circe extends Application {
 	// Create a new pair of binary numbers for a new problem.
 	problemData.generateNewProblem();
 
-	// Convert "Data" binary number to string and display
+	// Convert "Data" binary number to a string and display
 	string_output_len = problemData.getData_len();
 	string_output = "";
 	for (field_pos = 0; field_pos < string_output_len; field_pos++) {
@@ -197,7 +198,7 @@ public class Circe extends Application {
 	}
 	tfData.setText(string_output);
 
-	// Convert "Pattern" binary number to string and display
+	// Convert "Pattern" binary number to a string and display
 	string_output_len = problemData.getPattern_len();
 	string_output = "";
 	for (field_pos = 0; field_pos < string_output_len; field_pos++) {
@@ -208,8 +209,10 @@ public class Circe extends Application {
 	    }
 	}
 	tfPattern.setText(string_output);
-	B2Solver.solveBase2(problemData, model);
-//	      SP_Solver.Solve_ShiftedPoly(Base2_table, SP_table);
+
+	// Populate Base2 and Shifted Poly Models from the new Data and Pattern
+	B2Solver.solveBase2(problemData, B2Model);
+	SPSolver.solveShiftedPoly(B2Model, SPModel);
     }
 
     /*

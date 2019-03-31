@@ -32,9 +32,9 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
 public class Model {
-    public String[][] data;
-    public ObservableList<String[]> ols;
-    public TableView<String[]> tv;
+    private String[][] data;
+    private ObservableList<String[]> ols;
+    private TableView<String[]> tv;
 
     public Model(int rows, int columns) {
 	data = new String[rows][columns];
@@ -58,9 +58,19 @@ public class Model {
 	return ols;
     };
 
+    public TableView<String[]> getTableView() {
+	return tv;
+    };
+
     public void updateObList() {
 	ols = FXCollections.observableArrayList(data);
 	tv.setItems(ols);
+    }
+
+    public void updateTableView() {
+	ols = FXCollections.observableArrayList(data);
+	tv.setItems(ols);
+	tv.refresh();
     }
 
     public int getRowCount() {
