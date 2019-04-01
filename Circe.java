@@ -60,7 +60,7 @@ public class Circe extends Application {
     public void start(Stage stage) {
 	this.stage = stage;
 	// Set the Style for the primary Stage
-	stage.initStyle(StageStyle.DECORATED);
+	stage.initStyle(StageStyle.TRANSPARENT);
 	// Set the title of the primary Stage
 	stage.setTitle("Circe");
 	// Create the TabPane, 3 Tabs and their contents
@@ -171,7 +171,7 @@ public class Circe extends Application {
 
 	// Create the Shifted Poly Solution Tab and add the SP TableView
 	TableView<String[]> sptv = SPModel.getTableView();
-	sptv.getStyleClass().add("sptableview");
+	sptv.setId("sp-table-view");
 	Tab tabPoly = new Tab("Shifted Poly Solution", sptv);
 	tabPoly.setClosable(false);
 
