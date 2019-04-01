@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -39,6 +40,14 @@ public class Circe extends Application {
     public Base2Solver B2Solver = new Base2Solver();
     public Model SPModel = new Model(40, 1);
     public ShiftedPolySolver SPSolver = new ShiftedPolySolver();
+
+    /*
+     * The usual "main" method - this code is only executed on platforms that lack
+     * full JavaFX support.
+     */
+    public static void main(String[] args) {
+	Application.launch(args);
+    }
 
     /*
      * JavaFX Application thread automatically calls start() method. The parameter
@@ -112,6 +121,7 @@ public class Circe extends Application {
 
 	// Create a GridPane to hold the ImageView, Labels, TextFields and Buttons
 	GridPane gp = new GridPane();
+	gp.getStyleClass().add("grid-pane");
 
 	// Set Grid-lines-visible during debug
 	// gp.setGridLinesVisible(true);
@@ -160,7 +170,9 @@ public class Circe extends Application {
 	tabBinary.setClosable(false);
 
 	// Create the Shifted Poly Solution Tab and add the SP TableView
-	Tab tabPoly = new Tab("Shifted Poly Solution", SPModel.getTableView());
+	TableView<String[]> sptv = SPModel.getTableView();
+	sptv.getStyleClass().add("sptableview");
+	Tab tabPoly = new Tab("Shifted Poly Solution", sptv);
 	tabPoly.setClosable(false);
 
 	// Add all 3 Tabs to the TabPane
@@ -213,13 +225,5 @@ public class Circe extends Application {
 	// Populate Base2 and Shifted Poly Models from the new Data and Pattern
 	B2Solver.solveBase2(problemData, B2Model);
 	SPSolver.solveShiftedPoly(B2Model, SPModel);
-    }
-
-    /*
-     * The usual "main" method - this code is only executed on platforms that lack
-     * full JavaFX support.
-     */
-    public static void main(String[] args) {
-	Application.launch(args);
     }
 }

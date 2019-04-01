@@ -1,141 +1,81 @@
-GridPane {
-	-fx-padding: 10px;
-	-fx-alignment: center;
-	-fx-hgap: 10px;
-	-fx-vgap: 10px;
+.root {
+	-fx-darkbrown: #1f1009;
+	-fx-lightbrown: #5d4022;
+	-fx-darkturquoise: #152826;
+	-fx-lightturquoise: #0b4d3b;
+	-fx-darkaqua: #105930;
+	-fx-lightaqua: #37872a;
 }
 
-Label {
-    -fx-font-family: "Consolas";
-    -fx-font-size: 18px;
-    -fx-text-fill: #311c09;
-	-fx-alignment: baseline-left;
-}	
-
-TabPane {
-	-fx-border-style: solid inside;
-	-fx-border-color: #d6d9df;
-	-fx-border-width: 2;
-	-fx-border-insets: 5;
-	-fx-border-radius: 5;
+.tab-pane {
+	-fx-font-family: "Consolas";
+	-fx-font-size: 18px;
+	-fx-max-width: 64.7em;
 }
 
-.tab {
-    -fx-font-family: "Consolas";
-    -fx-font-size: 18px;
-    -fx-text-fill: #311c09;
-	-fx-alignment: top-left;
+.tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-insets: 0 1 1 0, 1 2 1 1, 2 3 1 2;
+    -fx-background-radius: 3 3 0 0, 2 2 0 0, 1 1 0 0;
+    -fx-padding: 0.083333em 0.5em 0.0769em 0.5em;
+}
+
+.grid-pane {
+	-fx-padding: 1em;
+	-fx-hgap: 1em;
+	-fx-vgap: 1em;
 }
 
 .table-view {
-	-fx-max-width: 65em;
 	-fx-resize-policy: CONSTRAINED_RESIZE_POLICY;
 	-fx-editable: false;
 }
 
-.column-header,
-.table-view .column-header,
-.table-view .column-header .label,
-.table-view .column-header .filler,
-.table-view .column-header-background .filler,
-.table-view .column-header-background .background {   
-    -fx-font-family: "Consolas";
-    -fx-font-size: 1em;
-	-fx-font-style: normal;
-	-fx-font-weight: normal;
-    -fx-text-fill: #311c09;
-    -fx-background-color: white;
-    -fx-stroke: transparent;
-    -fx-size: 2.5em;
-    -fx-alignment: CENTER;    
-    -fx-text-alignment: center;
+.sptableview {
+	-fx-resize-policy: UNCONSTRAINED_RESIZE_POLICY;
+	-fx-wtf: silly;
 }
 
-.table-row-cell:filled:hover {
-    -fx-size: 2.5em;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: center;
-}
-
-.table-view:row-selection {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-fixed-cell-size: 2.5em;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: center;
-}
-
-.cell,
-.table-cell,
-.table-caption,
-.table-column,
-.table-row-cell:empty,
-.table-row-cell:filled,
-.table-view .table-column {
-	-fx-width: 2.5em;
-	-fx-alignment: CENTER; 
-    -fx-text-alignment: CENTER;
-}
-
-.text-field:readonly {
-	-fx-max-width: 250px;
-	-fx-pref-column-count: 25;
-    -fx-font-family: "Consolas";
-    -fx-font-size: 18px;
-    -fx-text-fill: #311c09;
-	-fx-alignment: baseline-right;
-}
-
-.text-area:readonly {
-	-fx-max-height: 240;
-	-fx-pref-column-count: 80;
-	-fx-pref-row-count: 20;
-	-fx-wrap-text: false;
-	-fx-display-caret: false;
-    -fx-font-family: "Consolas";
-    -fx-font-size: 14px;
-}
-
-Button {
-	-fx-min-width:250;
+.button {
+	-fx-min-width: 20em;
+	-fx-max-width: 20em;
     -fx-background-color: 
-        #ecebe9,
+        derive(#ececec, 50%),
         rgba(0,0,0,0.05),
-        linear-gradient(#dcca8a, #c7a740),
-        linear-gradient(#f9f2d6 0%, #f4e5bc 20%, #e6c75d 80%, #e2c045 100%),
-        linear-gradient(#f6ebbe, #e6c34d);
+        linear-gradient(-fx-lightturquoise, -fx-darkturquoise),
+        linear-gradient(-fx-lightturquoise, -fx-darkturquoise),
+        linear-gradient(-fx-lightturquoise, -fx-darkturquoise);
     -fx-background-insets: 0,9 9 8 9,9,10,11;
     -fx-background-radius: 50;
     -fx-padding: 15 30 15 30;
     -fx-font-family: "Consolas";
     -fx-font-size: 18px;
-    -fx-text-fill: #311c09;
+    -fx-text-fill: -fx-lightaqua;
     -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.1) , 2, 0.0 , 0 , 1);
 }
 .button:hover {
     -fx-background-color: 
-        #ecebe9,
+        derive(#ececec, 50%),
         rgba(0,0,0,0.05),
-        linear-gradient(#dcca8a, #c7a740),
-        linear-gradient(#f9f2d6 0%, #f4e5bc 20%, #e6c75d 80%, #e2c045 100%),
-        linear-gradient(#e6c34d, #f6ebbe);
+        linear-gradient(-fx-lightturquoise, -fx-darkturquoise),
+        linear-gradient(-fx-lightturquoise, -fx-darkturquoise),
+        linear-gradient(-fx-darkturquoise, -fx-lightturquoise);
 }
 .button:pressed {
     -fx-padding: 15 30 15 30;
     -fx-background-insets: 0,9 9 8 9,9,0,11;
 }
-.button Text {
-    -fx-effect: dropshadow( one-pass-box , rgba(255,255,255,0.5) , 0, 0.0 , 0 , 1);
+.button > .text {
+    -fx-color: -fx-lightaqua;
 }
 
 .logo-text {
 	-fx-font-family: 'Anurati';
-	-fx-font-size: 72px;
+	-fx-font-size: 6em;
 	-fx-font-style: normal;
 	-fx-font-weight: bold;
 	-fx-text-alignment: left;
 	-fx-text-origin: bottom;
-	-fx-fill: #311c09;
+	-fx-fill: -fx-darkturquoise;
     -fx-stroke-width: 3;
-	-fx-stroke: #e6c34d;
+	-fx-stroke: -fx-lightaqua;
 }
