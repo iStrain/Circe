@@ -1,5 +1,5 @@
 # Circe
-JavaFX program to help students practice CRC calculations.
+JavaFX program to help students practice CRC calculations:  Still needs some minor tweaking of formatting, but essentially done.
 
 The original files Ian provided are in CRC Trainer Development.zip - you should definitely download those!
 
@@ -12,14 +12,9 @@ Our working set includes:
 
 They should compile OK in Eclipse with the .java files and Circe.css in the usual /src directory.
 
-Current status: if you compile and run it, you can see we have the main window and 3 tabs: 2 labels, 2 text fields, 2 buttons and a logo on the input pane; a working "Base 2 Solution" tab, and a working (but not yet properly formatted) "Shifted Poly Solution" tab.
+Current status: if you compile and run it, you can see we have the main window and 3 tabs: 2 labels, 2 text fields, 2 buttons and a logo on the input pane; a working "Base 2 Solution" tab; and a working "Shifted Poly Solution" tab.  I call that "job done"!
 
-We only have 1 job left, as I see it:
-A choice, either:
-(a)  Copy the exact same GUI format from Ian's other files; or
-(b)  Finish the formatting for the Shifted Poly Solution tab, and a few other minor changes, to make sure everything harmonises with our format.
-
-So, who wants to put a hand up for the formatting?
+Being the perfectionist I am, I will doubtless still fiddle around with the formatting, but I like the way it looks and works.
 
 Cheers,
 
