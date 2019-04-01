@@ -15,9 +15,10 @@
  * There are also accessor methods for the number of rows, and columns, in the array.
  * 
  * Additional functionality:
- * updateObList() - useful if you make a lot of changes to the array outside the class methods.
- * clearValues() - sets every element of the array, ObservableList and TableView to the empty string "".
- * clearValues(String) sets every element of these three variables to the String that was passed in as a 
+ * updateObList() method - useful if you make a lot of changes to the array outside the class methods.
+ * updateTableView() method - refreshes the TableView from the array. 
+ * clearValues() method - sets every element of the array, ObservableList and TableView to the empty string "".
+ * clearValues(String) method - sets every element of these three variables to the String that was passed in as a 
  * 	parameter (which can be any String, including an empty string "").
  */
 
