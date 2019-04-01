@@ -7,9 +7,8 @@
  * a TableView<String[]> to display the ObservableList.  The ObservableList can be used to instantiate the TableView, 
  * and as a source of Listener events.
  * 
- * All of these variables are public, so they can be accessed at speed without using the class methods.  However, if 
- * your code can stand a more leisurely pace, the class methods automatically keep the array, ObservableList and 
- * TableView consistent.  This prevents a lot of really weird bugs!
+ * All of these variables are private.  This helps the class methods automatically keep the array, ObservableList and 
+ * TableView consistent, and prevents a lot of really weird bugs!
  * 
  * Accessor and mutator methods are provided for the data: the accessor method (getValueAt(row, column)) looks at
  * the array, and the mutator method (setValueAt(String, row, column)) updates the array and the ObservableList.
