@@ -84,17 +84,18 @@ public class Circe extends Application {
 	root.getStylesheets().add("file:src/Circe.css");
 
 	// Create an Image from our file
-	ImageView iv = new ImageView(
-		"https://upload.wikimedia.org/wikipedia/commons/1/1d/J._W._Waterhouse_-_Circe_Invidiosa_-_Google_Art_Project.jpg");
+	ImageView iv = new ImageView();
 	iv.setPreserveRatio(true);
-	iv.setFitWidth(100);
+	iv.setFitHeight(225);
 
 	// Create the 2 x Labels (one for each Text Field)
-	Label lbData = new Label("Data");
-	Label lbPattern = new Label("Pattern");
+	Label lbData = new Label("Data:");
+	lbData.getStyleClass().add("label");
+	Label lbPattern = new Label("Pattern:");
+	lbData.getStyleClass().add("label");
 
 	// Create the "Circe" logo
-	Text tx = new Text("CIRCE");
+	Text tx = new Text("CiRCe");
 	tx.getStyleClass().add("logo-text");
 
 	// Create the 2 x Text Fields (one-liners)
@@ -128,7 +129,7 @@ public class Circe extends Application {
 
 	// Set column parameters, and add a TextArea + ImageView in Column 0
 	ColumnConstraints c0 = new ColumnConstraints();
-	c0.setPercentWidth(20);
+	c0.setPercentWidth(15);
 	c0.setHalignment(HPos.LEFT);
 	TextArea taInstructions = new TextArea("\nInstructions\n\n"
 		+ "1. Press the button below to get a new CRC Problem.\n\n" + "2. Attempt the problem yourself.\n\n"
@@ -136,19 +137,18 @@ public class Circe extends Application {
 	taInstructions.setEditable(false);
 	gp.add(taInstructions, 0, 0, 3, 1);
 	gp.add(iv, 0, 1, 1, 4);
-
 	// Set column parameters, and add 2 x Labels + Logo in Column 1
 	ColumnConstraints c1 = new ColumnConstraints();
-	c1.setPercentWidth(35);
+	c1.setPercentWidth(45);
 	c1.setHalignment(HPos.LEFT);
-	GridPane.setConstraints(lbData, 1, 1, 1, 1, HPos.LEFT, VPos.BASELINE);
-	GridPane.setConstraints(lbPattern, 1, 2, 1, 1, HPos.LEFT, VPos.BASELINE);
-	GridPane.setConstraints(tx, 1, 3, 1, 3, HPos.LEFT, VPos.BOTTOM);
+	GridPane.setConstraints(lbData, 1, 1, 1, 1, HPos.RIGHT, VPos.BASELINE);
+	GridPane.setConstraints(lbPattern, 1, 2, 1, 1, HPos.RIGHT, VPos.BASELINE);
+	GridPane.setConstraints(tx, 1, 3, 1, 2, HPos.LEFT, VPos.CENTER);
 	gp.addColumn(1, lbData, lbPattern, tx);
 
 	// Set column parameters, and add 2 x Text Fields, and 2 x Buttons in Column 2
 	ColumnConstraints c2 = new ColumnConstraints();
-	c2.setPercentWidth(45);
+	c2.setPercentWidth(40);
 	c2.setHalignment(HPos.RIGHT);
 	GridPane.setConstraints(tfData, 2, 1, 1, 1, HPos.RIGHT, VPos.BASELINE);
 	GridPane.setConstraints(tfPattern, 2, 2, 1, 1, HPos.RIGHT, VPos.BASELINE);

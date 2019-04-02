@@ -10,12 +10,45 @@
 	-fx-lightturquoise: #0b4d3b;
 	-fx-darkaqua: #105930;
 	-fx-lightaqua: #37872a;
+	-fx-font-family: "Consolas";
+	-fx-font-size: 18px;
+	-fx-fill: #5d4022;
+	-fx-background-color: #cc9f6b;
+	
+    -fx-text-box-border: ladder(
+        -fx-background,
+        black 10%,
+        derive(-fx-background, -15%) 30%
+    );
+    -fx-outer-border: derive(-fx-color,-23%);
+	
+	    -fx-inner-border: linear-gradient(to bottom,
+                ladder(
+                    -fx-color,
+                    derive(-fx-color,30%) 0%,
+                    derive(-fx-color,20%) 40%,
+                    derive(-fx-color,25%) 60%,
+                    derive(-fx-color,55%) 80%,
+                    derive(-fx-color,55%) 90%,
+                    derive(-fx-color,75%) 100%
+                ),
+                ladder(
+                    -fx-color,
+                    derive(-fx-color,20%) 0%,
+                    derive(-fx-color,10%) 20%,
+                    derive(-fx-color,5%) 40%,
+                    derive(-fx-color,-2%) 60%,
+                    derive(-fx-color,-5%) 100%
+                ));
+    -fx-inner-border-horizontal: linear-gradient(to right, derive(-fx-color,55%), derive(-fx-color,-5%));
+    -fx-inner-border-bottomup: linear-gradient(to top, derive(-fx-color,55%), derive(-fx-color,-5%));
+
 }
 
 .tab-pane {
-	-fx-font-family: "Consolas";
-	-fx-font-size: 18px;
 	-fx-max-width: 44.2em;
+	-fx-text-fill: -fx-darkbrown;
+
 }
 
 .tab-pane .tab-header-area .headers-region .tab {
@@ -28,6 +61,15 @@
 	-fx-padding: 1em;
 	-fx-hgap: 1em;
 	-fx-vgap: 1em;
+}
+
+.image-view {
+	-fx-image: url(J._W._Waterhouse_-_Circe_Invidiosa_-_Google_Art_Project.jpg);
+	-fx-image-max-height: 10em;
+}
+
+.label {
+	-fx-font-weight: bold;
 }
 
 .table-view {
@@ -88,18 +130,15 @@
 .text-area:readonly {
 	-fx-max-height: 20em;
 	-fx-pref-column-count: 40;
-	-fx-pref-row-count: 10;
 	-fx-wrap-text: false;
 	-fx-display-caret: false;
 }
 
 .logo-text {
 	-fx-font-family: 'Old English Text MT';
-	-fx-font-size: 4em;
+	-fx-font-size: 5em;
 	-fx-font-style: normal;
 	-fx-font-weight: bold;
-	-fx-text-alignment: left;
-	-fx-text-origin: TOP;
 	-fx-fill: -fx-darkturquoise;
     -fx-stroke-width: 3;
 	-fx-stroke: -fx-lightaqua;

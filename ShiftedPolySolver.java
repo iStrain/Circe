@@ -11,9 +11,6 @@
  */
 public class ShiftedPolySolver {
 
-   public ShiftedPolySolver() {
-   }
-
    public void solveShiftedPoly(Model B2Model, Model SPModel) {
 
       // Start on first line of B2Model and convert

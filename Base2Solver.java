@@ -10,10 +10,6 @@
  */
 public class Base2Solver {
 
-    public Base2Solver() {
-
-    }
-
     public void solveBase2(ProblemData prob, Model model) {
 
 	int col_counter;
