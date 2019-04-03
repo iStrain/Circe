@@ -79,12 +79,14 @@ public class Circe extends Application {
     private boolean createTabPane() {
 	// Create a TabPane to hold the 3 Tabs
 	root = new TabPane();
+	root.setId("main-tab-pane");
 
 	// Load the JavaFX CSS StyleSheet
-	root.getStylesheets().add("file:src/Circe.css");
+	root.getStylesheets().add(getClass().getResource("CirceStyles.css").toString());
 
 	// Create an Image from our file
 	ImageView iv = new ImageView();
+	iv.setId("image-view");
 	iv.setPreserveRatio(true);
 	iv.setFitHeight(225);
 
@@ -92,7 +94,7 @@ public class Circe extends Application {
 	Label lbData = new Label("Data:");
 	lbData.getStyleClass().add("label");
 	Label lbPattern = new Label("Pattern:");
-	lbData.getStyleClass().add("label");
+	lbPattern.getStyleClass().add("label");
 
 	// Create the "Circe" logo
 	Text tx = new Text("CiRCe");
@@ -108,24 +110,18 @@ public class Circe extends Application {
 	btNew = new Button("New CRC problem");
 	btNew.setTooltip(new Tooltip("Press this button to generate new Data and Pattern strings"));
 	btNew.setOnMousePressed(me -> new Thread(new Tone(262, 100)).start());
-	btNew.setOnAction(ae -> {
-	    updateProblemDisplay();
-	    System.out.println("Process New CRC problem");
-	});
+	btNew.setOnAction(ae -> updateProblemDisplay());
 
 	Button btExit = new Button("Exit");
 	btExit.setOnMousePressed(me -> new Thread(new Tone(262, 100)).start());
-	btExit.setOnAction(ae -> {
-	    System.out.println("Process Exit");
-	    System.exit(0);
-	});
+	btExit.setOnAction(ae -> System.exit(0));
 
 	// Create a GridPane to hold the ImageView, Labels, TextFields and Buttons
 	GridPane gp = new GridPane();
 	gp.getStyleClass().add("grid-pane");
 
 	// Set Grid-lines-visible during debug
-	// gp.setGridLinesVisible(true);
+	 gp.setGridLinesVisible(true);
 
 	// Set column parameters, and add a TextArea + ImageView in Column 0
 	ColumnConstraints c0 = new ColumnConstraints();
@@ -159,6 +155,7 @@ public class Circe extends Application {
 
 	// Create the Instructions Tab
 	Tab tabInput = new Tab("Instructions");
+	tabInput.getStyleClass().add("tab-instructions");
 	tabInput.setClosable(false);
 	tabInput.setContent(gp);
 
@@ -172,6 +169,10 @@ public class Circe extends Application {
 	// Create the Shifted Poly Solution Tab and add the SP TableView
 	TableView<String[]> sptv = SPModel.getTableView();
 	sptv.setId("sp-table-view");
+	sptv.getColumns().forEach (e -> {
+	    e.setId("sp-table-column");
+	    e.prefWidthProperty().bind(sptv.widthProperty().subtract(23.0d));
+	    });
 	Tab tabPoly = new Tab("Shifted Poly Solution", sptv);
 	tabPoly.setClosable(false);
 
