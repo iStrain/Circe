@@ -15,7 +15,7 @@ They should compile OK in Eclipse with the .java files, Circe.css and the ".jpg"
 
 Current status: if you compile and run it, you can see we have the main window and 3 tabs: 2 labels, 2 text fields, 2 buttons and a logo on the input pane; a working "Base 2 Solution" tab; and a working "Shifted Poly Solution" tab.  I call that "job done"!
 
-I have also included some screen-shots, so you can see what the project's Instructions, Base 2 and Shifted Poly tabs look like.
+I have also included some screen-shots, so you can see what the project's Instructions, Base 2 and Shifted Poly tabs look like.  Alternatively, you can download and run the Circe.exe file.
 
 Being the perfectionist I am, I will doubtless continue to fiddle around with the formatting (and, of course, will always welcome suggestions/contributions with respect thereto), but I now don't mind the way it looks and works.
 
