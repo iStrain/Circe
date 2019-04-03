@@ -60,7 +60,7 @@ public class Circe extends Application {
     public void start(Stage stage) {
 	this.stage = stage;
 	// Set the Style for the primary Stage
-	stage.initStyle(StageStyle.TRANSPARENT);
+	stage.initStyle(StageStyle.DECORATED);
 	// Set the title of the primary Stage
 	stage.setTitle("Circe");
 	// Create the TabPane, 3 Tabs and their contents
@@ -113,6 +113,7 @@ public class Circe extends Application {
 	btNew.setOnAction(ae -> updateProblemDisplay());
 
 	Button btExit = new Button("Exit");
+	btExit.setTooltip(new Tooltip("Press this button when you've had enough"));
 	btExit.setOnMousePressed(me -> new Thread(new Tone(262, 100)).start());
 	btExit.setOnAction(ae -> System.exit(0));
 
@@ -121,7 +122,7 @@ public class Circe extends Application {
 	gp.getStyleClass().add("grid-pane");
 
 	// Set Grid-lines-visible during debug
-	 gp.setGridLinesVisible(true);
+	// gp.setGridLinesVisible(true);
 
 	// Set column parameters, and add a TextArea + ImageView in Column 0
 	ColumnConstraints c0 = new ColumnConstraints();
@@ -133,6 +134,7 @@ public class Circe extends Application {
 	taInstructions.setEditable(false);
 	gp.add(taInstructions, 0, 0, 3, 1);
 	gp.add(iv, 0, 1, 1, 4);
+
 	// Set column parameters, and add 2 x Labels + Logo in Column 1
 	ColumnConstraints c1 = new ColumnConstraints();
 	c1.setPercentWidth(45);
@@ -167,11 +169,12 @@ public class Circe extends Application {
 	tabBinary.setClosable(false);
 
 	// Create the Shifted Poly Solution Tab and add the SP TableView
+	// This is more complicated because we need to bind column width
 	TableView<String[]> sptv = SPModel.getTableView();
 	sptv.setId("sp-table-view");
-	sptv.getColumns().forEach (e -> {
-	    e.setId("sp-table-column");
-	    e.prefWidthProperty().bind(sptv.widthProperty().subtract(23.0d));
+	sptv.getColumns().forEach (column -> {
+	    column.setId("sp-table-column");
+	    column.prefWidthProperty().bind(sptv.widthProperty().subtract(21.0d));
 	    });
 	Tab tabPoly = new Tab("Shifted Poly Solution", sptv);
 	tabPoly.setClosable(false);
