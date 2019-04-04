@@ -49,6 +49,7 @@ public class Model {
 		    return new SimpleStringProperty((p.getValue()[colNo]));
 		}
 	    });
+	    tc.prefWidthProperty().bind(tv.widthProperty().subtract(21.0d).divide(columns));
 	    tv.getColumns().add(tc);
 	}
 	tv.setItems(ols);

@@ -62,7 +62,7 @@ public class Circe extends Application {
 	// Set the Style for the primary Stage
 	stage.initStyle(StageStyle.DECORATED);
 	// Set the title of the primary Stage
-	stage.setTitle("Circe");
+	stage.setTitle("CiRCe");
 	// Create the TabPane, 3 Tabs and their contents
 	createTabPane();
 	// Create a Scene based on the TabPane with no background fill
@@ -79,7 +79,7 @@ public class Circe extends Application {
     private boolean createTabPane() {
 	// Create a TabPane to hold the 3 Tabs
 	root = new TabPane();
-	root.setId("main-tab-pane");
+//	System.out.println(root.getStyleClass());
 
 	// Load the JavaFX CSS StyleSheet
 	root.getStylesheets().add(getClass().getResource("CirceStyles.css").toString());
@@ -92,9 +92,7 @@ public class Circe extends Application {
 
 	// Create the 2 x Labels (one for each Text Field)
 	Label lbData = new Label("Data:");
-	lbData.getStyleClass().add("label");
 	Label lbPattern = new Label("Pattern:");
-	lbPattern.getStyleClass().add("label");
 
 	// Create the "Circe" logo
 	Text tx = new Text("CiRCe");
@@ -130,7 +128,7 @@ public class Circe extends Application {
 	c0.setHalignment(HPos.LEFT);
 	TextArea taInstructions = new TextArea("\nInstructions\n\n"
 		+ "1. Press the button below to get a new CRC Problem.\n\n" + "2. Attempt the problem yourself.\n\n"
-		+ "3. Compare your answers to those in the Base2 and Shifted Poly tabs.\n");
+		+ "3. Compare your answers to those in the Base2 and Shifted Poly tabs.");
 	taInstructions.setEditable(false);
 	gp.add(taInstructions, 0, 0, 3, 1);
 	gp.add(iv, 0, 1, 1, 4);
@@ -157,7 +155,7 @@ public class Circe extends Application {
 
 	// Create the Instructions Tab
 	Tab tabInput = new Tab("Instructions");
-	tabInput.getStyleClass().add("tab-instructions");
+	tabInput.setId("tab-instructions");
 	tabInput.setClosable(false);
 	tabInput.setContent(gp);
 
@@ -166,17 +164,19 @@ public class Circe extends Application {
 
 	// Create the Base2 Solution Tab and add the B2 TableView
 	Tab tabBinary = new Tab("Base2 Solution", B2Model.getTableView());
+	tabBinary.setId("tab-base2");
 	tabBinary.setClosable(false);
 
 	// Create the Shifted Poly Solution Tab and add the SP TableView
-	// This is more complicated because we need to bind column width
+	// This is more complicated because we need to set the column ID and Text
 	TableView<String[]> sptv = SPModel.getTableView();
 	sptv.setId("sp-table-view");
 	sptv.getColumns().forEach (column -> {
 	    column.setId("sp-table-column");
-	    column.prefWidthProperty().bind(sptv.widthProperty().subtract(21.0d));
+	    column.setText("Shifted Polynomial Solution");
 	    });
 	Tab tabPoly = new Tab("Shifted Poly Solution", sptv);
+	tabPoly.setId("tab-poly");
 	tabPoly.setClosable(false);
 
 	// Add all 3 Tabs to the TabPane
