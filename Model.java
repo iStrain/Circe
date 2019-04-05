@@ -32,26 +32,35 @@ import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
 public class Model {
-    private String[][] data;
-    private ObservableList<String[]> ols;
-    private TableView<String[]> tv;
+    private String[][] data; // Underlying 2D String array used as the data model for the TableView
+    private ObservableList<String[]> ols; // Observable list of String arrays linking data model to TableView
+    private TableView<String[]> tv; // TableView of String arrays used for display
 
+    // Constructor for a Model with the (specified) number of rows and columns
     public Model(int rows, int columns) {
 	data = new String[rows][columns];
 	ols = FXCollections.observableArrayList(data);
 	tv = new TableView<String[]>();
+
+	// Initialise the columns in the TableView
 	for (int i = 0; i < data[0].length; i++) {
 	    TableColumn<String[], String> tc = new TableColumn<>(String.valueOf(i));
 	    final int colNo = i;
+
+	    // Set a CellValueFactory callback method so we can see the values in the individual cells
 	    tc.setCellValueFactory(new Callback<CellDataFeatures<String[], String>, ObservableValue<String>>() {
 		@Override
 		public ObservableValue<String> call(CellDataFeatures<String[], String> p) {
 		    return new SimpleStringProperty((p.getValue()[colNo]));
 		}
 	    });
-	    tc.prefWidthProperty().bind(tv.widthProperty().subtract(21.0d).divide(columns));
+
+	    // Take the available real estate, subtract 21 pixels for borders, etc and divide amongst the columns
+	    tc.prefWidthProperty().bind(tv.widthProperty().subtract(30.0d).divide(columns));
 	    tv.getColumns().add(tc);
 	}
+
+	// Link the ObservableList of String arrays (ie. columns) to the TableView
 	tv.setItems(ols);
     }
 
@@ -89,6 +98,14 @@ public class Model {
     public void setValueAt(String str, int row, int column) {
 	this.data[row][column] = str;
 	ols.set(row, data[row]);
+    }
+
+    public int findEmpty(int row) {
+	int rInt = 0;
+	while ((rInt < this.data[row].length) && (!data[row][rInt].isEmpty())) {
+	    rInt++;
+	}
+	return rInt;
     }
 
     public void clearValues() {

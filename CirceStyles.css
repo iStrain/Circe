@@ -4,7 +4,7 @@
  * dark shades have been selected, to use as dominant colours for our GUI.
  */ 
 .root {
-	-fx-max-width: 60em;
+	-fx-max-width: 80em;
 
 	-fx-darkbrown: #1f1009;
 	-fx-lightbrown: #5d4022;
@@ -21,7 +21,7 @@
 	-fx-faint-focus-color: transparent;
 	-fx-background-color: #cc9f6b;
 	-fx-border-light: derive(#cc9f6b, 50%);
-	-fx-border-dark: derive(#cc9f6b, -50%);
+	-fx-border-dark: derive(#cc9f6b, -35%);
 }
 
 .tab-pane {
@@ -94,6 +94,7 @@
 }
 
 .table-view {
+	-fx-pref-width: 60em;
 	-fx-resize-policy: CONSTRAINED_RESIZE_POLICY;
 	-fx-editable: false;
 }
@@ -139,22 +140,29 @@
 }
 
 .text-field:readonly {
+	-fx-alignment: center;
+	-fx-border-color: -fx-border-light -fx-border-dark -fx-border-dark -fx-border-light;
+	-fx-border-style: solid inside line-join round;
+	-fx-border-width: 3 3 2 3;
+	-fx-border-radius: 2;
+	-fx-border-insets: 3 3 2 3;
+	-fx-background-radius: 2;
+	-fx-background-insets: 3 3 2 3;
 	-fx-text-fill: -fx-darkbrown;
 	-fx-max-width: 15em;
 	-fx-pref-column-count: 15;
 	-fx-alignment: baseline-right;
-	-fx-border-color: -fx-border-dark -fx-border-light -fx-border-light -fx-border-dark;
-	-fx-border-insets: 4;
 }
 
 .text-area:readonly {
-	-fx-text-fill: -fx-darkbrown;
-	-fx-max-height: 20em;
-	-fx-pref-column-count: 40;
-	-fx-wrap-text: false;
-	-fx-display-caret: false;
-	-fx-border-color: -fx-border-dark -fx-border-light -fx-border-light -fx-border-dark;
-	-fx-border-insets: 4;
+	-fx-alignment: center;
+	-fx-border-color: -fx-border-light -fx-border-dark -fx-border-dark -fx-border-light;
+	-fx-border-style: solid inside line-join round;
+	-fx-border-width: 3 3 2 3;
+	-fx-border-radius: 2;
+	-fx-border-insets: 3 3 2 3;
+	-fx-background-radius: 2;
+	-fx-background-insets: 3 3 2 3;
 }
 
 .logo-text {
